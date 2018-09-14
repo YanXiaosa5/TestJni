@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.baitu.jnitest"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk{
+            moduleName "uninstall" //生成so的名称
+            abiFilters "arm64-v8a", "armeabi-v7a", "x86","x86_64"   //输出制定三种abi体系结构下的so库
+        }
+
+    }
+
+    //正常的使用jni的步骤会提示不再支持ndk编译,报错提示会给出Android.mk的位置，请将Android.mk文件copy到jni目录下,然后将下面的externalNativeBuild节点添加到android节点下,path为Android.mk的路径
+    externalNativeBuild{
+        ndkBuild{
+            path "src/main/jni/Android.mk"
+        }
+    }
+
+    signingConfigs {
+        yanxiaosa {
+            storeFile file("../yxs_umeng.jks")
+            storePassword "yanxiaosa"
+            keyAlias "yanxiaosa"
+            keyPassword "yanxiaosa"
+        }
+
+        release {
+            storeFile file("../yxs_umeng.jks")
+            storePassword "yanxiaosa"
+            keyAlias "yanxiaosa"
+            keyPassword "yanxiaosa"
+        }
+    }
+
+    buildTypes {
+        yanxiaosa {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.yanxiaosa
+        }
+
+        release{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}

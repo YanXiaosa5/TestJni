@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".snaphelp.use.MainActivity"/>
+        <activity android:name=".snaphelp.use.GridActivity"/>
     </application>
 
 </manifest>

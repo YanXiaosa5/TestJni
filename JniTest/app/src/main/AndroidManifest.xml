@@ -9,16 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <!--<activity android:name=".MainActivity">-->
+        <activity android:name=".testmjb.TestMJBActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".snaphelp.use.MainActivity"/>
-        <activity android:name=".snaphelp.use.GridActivity"/>
+        <activity android:name=".snaphelp.use.MainActivity" />
+        <activity android:name=".snaphelp.use.GridActivity" />
+        <!--<activity android:name=".testmjb.TestMJBActivity"></activity>-->
     </application>
 
 </manifest>
